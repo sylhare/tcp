@@ -20,7 +20,7 @@ class Example {
             val server = ServerSocket(9999)
             println("Server running on port ${server.localPort}")
             val client = server.accept()
-            println("Server's client connected : ${client.inetAddress.hostAddress}")
+            println("Client connected : ${client.inetAddress.hostAddress}")
             val scanner = Scanner(client.inputStream)
             while (scanner.hasNextLine()) {
                 println("Server received: ${scanner.nextLine()}")
@@ -30,7 +30,7 @@ class Example {
         }
 
         fun client() {
-            println("Client ready to stream")
+            println("Client's ready to stream")
             val client = Socket("127.0.0.1", 9999)
             client.outputStream.write("Hello from the client!".toByteArray())
             client.close()

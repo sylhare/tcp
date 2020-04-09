@@ -1,12 +1,40 @@
 package tcp
 
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.PrintWriter
 import java.net.Socket
+import java.util.*
 
-/**
- * https://stackoverflow.com/questions/56535473/how-to-send-and-receive-strings-through-tcp-connection-using-kotlin
- */
+class Client {
+    lateinit var client: Socket
+    lateinit var output: PrintWriter
+    lateinit var input: BufferedReader
+
+    fun startConnection(host: String, port: Int) {
+        client = Socket(host, port)
+        output = PrintWriter(client.getOutputStream(), true)
+        input = BufferedReader(InputStreamReader(client.inputStream))
+        println("Client connected : ${client.inetAddress.hostAddress}")
+    }
+
+    fun sendMessage(message: String): String {
+        println("Client sending [$message]")
+        output.println(message)
+        return input.readLine()
+    }
+
+    fun stopConnection() {
+        client.close()
+        input.close()
+        output.close()
+        println("${client.inetAddress.hostAddress} closed the connection")
+    }
+}
+
 fun main() {
-    val client = Socket("127.0.0.1", 9999)
-    client.outputStream.write("Hello from the client!".toByteArray())
-    client.close()
+    val client = Client()
+    client.startConnection("127.0.0.1", 9999)
+    client.sendMessage("Hello from the client")
+    client.stopConnection()
 }
