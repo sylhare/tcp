@@ -5,15 +5,18 @@ plugins {
 
 group 'exercise'
 version '1.0-SNAPSHOT'
-
 sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    // maven { url "https://dl.bintray.com/kotlin/ktor" }
+    jcenter()
 }
 
 dependencies {
+    implementation "io.ktor:ktor-server-netty:1.3.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "ch.qos.logback:logback-classic:1.2.3"
     testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
 }
 
