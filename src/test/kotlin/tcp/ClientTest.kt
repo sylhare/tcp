@@ -1,13 +1,12 @@
 package tcp
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import java.io.IOException
 
-internal class TCPTest {
+internal class ClientTest {
 
     companion object {
         private const val port = 9999
@@ -17,28 +16,41 @@ internal class TCPTest {
         @BeforeAll
         @JvmStatic
         fun setup() {
-            GlobalScope.launch {
+            Thread(Runnable {
                 server = Server()
-                server.start(port)
-            }
+                try {
+                    server.start(port)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }).start()
         }
 
         @AfterAll
         @JvmStatic
         fun tearDown() {
-            client.stopConnection()
             server.stop()
-
         }
     }
 
     @Test
-    fun serverRespondsWhenStartedTest() {
+    fun serverRespondsHelloClient() {
         client = Client()
         client.startConnection("127.0.0.1", port)
         val response = client.sendMessage("hello server")
         Assertions.assertEquals("hello client", response)
+        client.stopConnection()
+    }
 
+    @Test
+    fun serverRespondsSomethingElse() {
+        tearDown() // Things gets weird
+        setup()
+        client = Client()
+        client.startConnection("127.0.0.1", port)
+        val response = client.sendMessage("Yo!")
+        Assertions.assertNotEquals("hello client", response)
+        client.stopConnection()
     }
 
 }

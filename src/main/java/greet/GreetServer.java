@@ -21,8 +21,7 @@ public class GreetServer {
         String greeting = in.readLine();
         if ("hello server".equals(greeting)) {
             out.println("hello client");
-        }
-        else {
+        } else {
             out.println("unrecognised greeting");
         }
     }
@@ -33,8 +32,9 @@ public class GreetServer {
         clientSocket.close();
         serverSocket.close();
     }
+
     public static void main(String[] args) throws IOException {
-        GreetServer server=new GreetServer();
+        GreetServer server = new GreetServer();
         server.start(6666);
     }
 }

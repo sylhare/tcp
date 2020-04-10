@@ -19,8 +19,7 @@ import java.net.InetSocketAddress
 @KtorExperimentalAPI
 fun main(args: Array<String>) {
     runBlocking {
-        val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().bind(
-            InetSocketAddress("127.0.0.1", 2323))
+        val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().bind(InetSocketAddress("127.0.0.1", 2323))
         println("Started echo telnet server at ${server.localAddress}")
 
         while (true) {
@@ -28,12 +27,14 @@ fun main(args: Array<String>) {
 
             launch {
                 println("Socket accepted: ${socket.remoteAddress}")
+
                 val input = socket.openReadChannel()
                 val output = socket.openWriteChannel(autoFlush = true)
 
                 try {
                     while (true) {
                         val line = input.readUTF8Line()
+
                         println("${socket.remoteAddress}: $line")
                         output.write("$line\r\n")
                     }
@@ -45,4 +46,5 @@ fun main(args: Array<String>) {
         }
     }
 }
+
 
