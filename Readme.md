@@ -1,10 +1,13 @@
 # TCP
 
-TCP stands for Transfer Control Protocol.
+Packed with information about TCP, bits and bytes. 
+And how to put it into action in Kotlin and Java.
 
 ## Introduction
 
 ### What is [TCP](https://fr.wikipedia.org/wiki/Transmission_Control_Protocol) ? 
+
+TCP stands for Transfer Control Protocol.
 
 TCP is connection-oriented, 
 meaning an exclusive connection must first be established between client and server for communication to take place.
@@ -29,7 +32,37 @@ There are 4 types of sockets (stream, datagram, raw, sequenced packet).
 
 Socket is layer 5 (data, Session), two computer should have a socket connection to exchange data. 
 You can use TCP for the transport of that data.
+
 ## Bits and Bytes
 
-A [byte](https://www.thethingsnetwork.org/docs/devices/bytes.html) is a group of 8 bits (256 permutations 0000 0000 to 1111 1111)
+### Representation
+
 A bit is the most basic unit and can be either 1 or 0. 
+A [byte](https://www.thethingsnetwork.org/docs/devices/bytes.html) is a group of 8 bits (256 permutations 0000 0000 to 1111 1111)
+
+Thus, one byte can represent a decimal number between 0 and 255. 
+Usually computers handles bytes instead of bits.
+
+Then there is [hexadecimal](https://introcs.cs.princeton.edu/java/61data/) of base 16, using both numbers: 0 to 9 and letters: A to F.
+Usually you see hex values using `0x` in order not to confuse them with decimal values in certain cases.
+```bash
+hex     byte        dec  
+0x11 	0001 0001   17  
+
+```
+However I find it easier to use hex to represent bytes.
+
+![dec - binary - hex conversion](./src/main/resources/bits.png)
+
+### Signed bits
+
+You can also handle negative number with bits using [Two complements](https://en.wikipedia.org/wiki/Two%27s_complement).
+With 3 bits from `000` to `111` can give:
+  - from 0 to 7 (`000` is 0 and `111` is seven)
+  - from -4 to 3 using two's complement (`100` is -4 and `011` is 3)
+
+The two's complement of an N-bit number is defined as its complement with respect to 2N. 
+For instance, for the three-bit number 010, the two's complement is 110, because 1000 - 010 = 110 with 1000 a 4bits number and 010 is 0x2.
+The two's complement is calculated by inverting the digits and adding one:
+ - `010` inverted gives `101` plus `001` gives `110`. 
+ - So from 2 (`010`), you get -2 (`110`).      
