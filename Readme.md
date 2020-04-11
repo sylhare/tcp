@@ -29,3 +29,7 @@ There are 4 types of sockets (stream, datagram, raw, sequenced packet).
 
 Socket is layer 5 (data, Session), two computer should have a socket connection to exchange data. 
 You can use TCP for the transport of that data.
+## Bits and Bytes
+
+A [byte](https://www.thethingsnetwork.org/docs/devices/bytes.html) is a group of 8 bits (256 permutations 0000 0000 to 1111 1111)
+A bit is the most basic unit and can be either 1 or 0. 
