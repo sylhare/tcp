@@ -5,13 +5,11 @@ import java.io.InputStreamReader
 import java.io.PrintWriter
 import java.net.ServerSocket
 import java.net.Socket
-import java.util.*
 
 class Server {
 
     lateinit var server: ServerSocket
     lateinit var client: Socket
-    lateinit var reader: Scanner
     lateinit var output: PrintWriter
     lateinit var input: BufferedReader
 
@@ -23,24 +21,28 @@ class Server {
         output = PrintWriter(client.getOutputStream(), true)
         input = BufferedReader(InputStreamReader(client.inputStream))
         println("Client connected : ${client.inetAddress.hostAddress}")
-        reader = Scanner(client.inputStream)
+        handleMessage()
+    }
 
-        while (reader.hasNextLine()) {
-            val message = reader.nextLine()
-            println("Server receiving [${message}]")
-            output.println(when(message) {
-                "hello server" -> "hello client"
-                else -> "Danger ... friend"
-            })
-            break
+    private fun handleMessage() {
+        val message = input.readLine()
+        println("Server receiving [${message}]")
+        val response = when (message) {
+            "hello server" -> "hello client"
+            else -> "Danger ... friend"
         }
-
+        println("Server responding [${response}]")
+        output.println(response)
     }
 
     fun stop() {
-        input.close()
-        output.close()
-        server.close()
+        try {
+            input.close()
+            output.close()
+            server.close()
+        } catch (e: Exception) {
+            println(e)
+        }
     }
 }
 

@@ -28,13 +28,6 @@ class BytesTest {
     }
 
     @Test
-    /**
-     * Two's complement to represent decimal negative values
-     * 3 bits from 000 to 111 can give:
-     *   - from 0 to 7 (000 is 0 and 111 is seven)
-     *   - from -4 to 3 using two's complement (100 is -4 and 011 is 3, 111 is -1)
-     * https://en.wikipedia.org/wiki/Two%27s_complement
-     */
     fun bitwiseOperation() {
         assertEquals(12, 0x0c)  // 00001100
         assertEquals(25, 0x19)  // 00011001
