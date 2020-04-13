@@ -14,7 +14,7 @@ import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 
 
-class EchoServer {
+internal class EchoServer {
 
     @KtorExperimentalAPI
     fun start() {

@@ -12,6 +12,7 @@ import kotlinx.coroutines.runBlocking
 import java.net.InetSocketAddress
 
 class EchoClient {
+    @KtorExperimentalAPI
     fun start() {
         runBlocking {
             val socket = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(InetSocketAddress("127.0.0.1", 2323))

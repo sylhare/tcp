@@ -5,7 +5,7 @@ import java.io.InputStreamReader
 import java.io.PrintWriter
 import java.net.Socket
 
-class Client {
+internal class Client {
     lateinit var client: Socket
     lateinit var output: PrintWriter
     lateinit var input: BufferedReader
