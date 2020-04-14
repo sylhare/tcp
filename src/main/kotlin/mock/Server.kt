@@ -1,4 +1,4 @@
-package example
+package mock
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

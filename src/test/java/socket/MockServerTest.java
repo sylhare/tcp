@@ -12,7 +12,6 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 public class MockServerTest {
@@ -23,34 +22,28 @@ public class MockServerTest {
     private Socket mockClientSocket;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IOException {
         MockitoAnnotations.initMocks(this);
 
-        try {
-            PipedOutputStream oStream = new PipedOutputStream();
-            PipedInputStream iStream = new PipedInputStream(oStream);
-            when(mockClientSocket.getOutputStream()).thenReturn(oStream);
-            when(mockClientSocket.getInputStream()).thenReturn(iStream);
-            when(mockClientSocket.isClosed()).thenReturn(false);
-            when(mockServerSocket.accept()).thenReturn(mockClientSocket);
-        } catch (IOException e) {
-            fail(e.getMessage());
-        }
+        PipedOutputStream oStream = new PipedOutputStream();
+        PipedInputStream iStream = new PipedInputStream(oStream);
+        when(mockClientSocket.getOutputStream()).thenReturn(oStream);
+        when(mockClientSocket.getInputStream()).thenReturn(iStream);
+        when(mockClientSocket.isClosed()).thenReturn(false);
+        when(mockServerSocket.accept()).thenReturn(mockClientSocket);
     }
 
     @Test
-    void testConnection() {
+    void testConnection() throws IOException {
         TcpSocketConnection connection = new TcpSocketConnection(mockServerSocket); // Add mock Socket
-        try {
-            connection.listen(); // Sends a "Hello, world!" to a connected client
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(mockClientSocket.getInputStream(), StandardCharsets.UTF_8));
-            String receivedMessage = reader.readLine();
-            assertEquals("Hello, world!", receivedMessage);
-            mockClientSocket.close();
-            connection.closeSocket();
-        } catch (IOException e) {
-            fail(e.getMessage());
-        }
+
+        connection.listen(); // Sends a "Hello, world!" to a connected client
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(mockClientSocket.getInputStream(), StandardCharsets.UTF_8));
+        String receivedMessage = reader.readLine();
+        assertEquals("Hello, world!", receivedMessage);
+        mockClientSocket.close();
+        connection.closeSocket();
+
     }
 }
