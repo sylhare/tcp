@@ -31,6 +31,8 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host:1.3.2")
     testImplementation("org.mockito:mockito-core:2.23.4")
 
+    implementation("org.springframework.integration:spring-integration-core")
+    implementation("org.springframework.integration:spring-integration-ip")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
