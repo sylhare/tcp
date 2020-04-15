@@ -5,6 +5,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import io.mockk.just
+import io.mockk.verify
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -46,6 +47,7 @@ internal class ServerTest {
         val reader = BufferedReader(InputStreamReader(mockClientSocket.getInputStream(), StandardCharsets.UTF_8))
         val receivedMessage = reader.readLine()
         Assertions.assertEquals("Hello, world!", receivedMessage)
+        verify { mockServerSocket.accept() }
         server.close()
     }
 }

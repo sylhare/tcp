@@ -43,7 +43,7 @@ public class Client {
             // printing reply to console
             System.out.println("Recieved from server : " + res);
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -53,8 +53,8 @@ public class Client {
             in.close();
             out.close();
             socket.close();
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }
 
