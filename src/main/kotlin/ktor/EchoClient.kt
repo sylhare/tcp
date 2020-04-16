@@ -15,7 +15,8 @@ class EchoClient {
     @KtorExperimentalAPI
     fun start() {
         runBlocking {
-            val socket = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(InetSocketAddress("127.0.0.1", 2323))
+            val socket =
+                aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(InetSocketAddress("127.0.0.1", 2323))
             val input = socket.openReadChannel()
             val output = socket.openWriteChannel(autoFlush = true)
 

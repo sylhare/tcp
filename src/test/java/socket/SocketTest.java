@@ -1,6 +1,6 @@
 package socket;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * http://rememberjava.com/socket/2017/02/21/socket_client_server.html

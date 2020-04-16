@@ -11,6 +11,10 @@ import java.nio.charset.StandardCharsets;
 class InnerListenerClass implements Runnable {
     private final ServerSocket socket;
 
+    public InnerListenerClass(final ServerSocket socket) {
+        this.socket = socket;
+    }
+
     @Override
     public void run() {
         try {
@@ -26,9 +30,5 @@ class InnerListenerClass implements Runnable {
         } catch (InterruptedException | IOException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public InnerListenerClass(final ServerSocket socket) {
-        this.socket = socket;
     }
 }

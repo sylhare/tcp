@@ -13,6 +13,11 @@ public class GreetServer {
     private PrintWriter out;
     private BufferedReader in;
 
+    public static void main(String[] args) throws IOException {
+        GreetServer server = new GreetServer();
+        server.start(6666);
+    }
+
     public void start(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         clientSocket = serverSocket.accept();
@@ -31,10 +36,5 @@ public class GreetServer {
         out.close();
         clientSocket.close();
         serverSocket.close();
-    }
-
-    public static void main(String[] args) throws IOException {
-        GreetServer server = new GreetServer();
-        server.start(6666);
     }
 }

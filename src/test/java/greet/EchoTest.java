@@ -26,7 +26,7 @@ class EchoTest {
         }).start();
 
         new Thread(() -> {
-        multiServer = new EchoMultiServer();
+            multiServer = new EchoMultiServer();
             try {
                 multiServer.start(5555);
             } catch (IOException e) {

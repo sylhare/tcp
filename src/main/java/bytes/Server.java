@@ -29,6 +29,10 @@ public class Server {
         }
     }
 
+    public static void main(String[] args) {
+        new EchoByteServer(5000);
+    }
+
     private void close() throws IOException {
         // close connection
         this.socket.close();
@@ -67,9 +71,5 @@ public class Server {
         server = new ServerSocket(port);
         System.out.println("Server started");
         System.out.println("Waiting for a client ...");
-    }
-
-    public static void main(String[] args) {
-        new Server(5000);
     }
 }

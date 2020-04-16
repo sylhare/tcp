@@ -1,6 +1,7 @@
 package spring
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.integration.annotation.ServiceActivator
 import org.springframework.integration.channel.DirectChannel
@@ -11,11 +12,11 @@ import org.springframework.integration.ip.tcp.serializer.ByteArrayCrLfSerializer
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.MessageHandler
 
-@Bean
-fun port() = 9998
+@Property("\${spring.config.host}")
+internal lateinit var host: String
 
 @Bean
-fun host() = "localhost"
+fun port() = 9998
 
 // Create the tcp outgoing connection
 @Bean
@@ -50,7 +51,7 @@ fun getTcpConnectionInterceptorFactoryChain(@Autowired tcpConnectionInterceptorF
 
 @Bean
 fun clientClientFactory(@Autowired interceptorFactoryChain: TcpConnectionInterceptorFactoryChain): AbstractClientConnectionFactory {
-    val tcpNetClientConnectionFactory = TcpNetClientConnectionFactory(host(), port())
+    val tcpNetClientConnectionFactory = TcpNetClientConnectionFactory(host, port())
     tcpNetClientConnectionFactory.setInterceptorFactoryChain(interceptorFactoryChain)
     return tcpNetClientConnectionFactory
 }

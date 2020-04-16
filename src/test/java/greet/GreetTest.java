@@ -13,7 +13,7 @@ class GreetTest {
     private static GreetServer server;
 
     @BeforeAll
-    static void setup(){
+    static void setup() {
         new Thread(() -> {
             server = new GreetServer();
             try {

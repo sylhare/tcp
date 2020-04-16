@@ -15,6 +15,10 @@ public class Client {
         stop();
     }
 
+    public static void main(String[] args) {
+        new Client("127.0.0.1", 5000);
+    }
+
     private void handle() {
         try {
             byte[] arr = {(byte) 0x00, (byte) 0x01, (byte) 0x00, (byte) 0x10, (byte) 0x00, (byte) 0x01, (byte) 0x00,
@@ -72,9 +76,5 @@ public class Client {
         } catch (IOException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
-    }
-
-    public static void main(String[] args) {
-        new Client("127.0.0.1", 5000);
     }
 }

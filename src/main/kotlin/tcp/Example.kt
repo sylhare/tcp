@@ -2,6 +2,7 @@ package tcp
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.springframework.context.annotation.PropertySource
 import tcp.Example.Companion.client
 import tcp.Example.Companion.server
 import java.net.ServerSocket
