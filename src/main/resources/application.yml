@@ -1,0 +1,12 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  config:
+    host: "localhost"
+
+logging:
+  level:
+    spring: DEBUG
+  pattern:
+    console: "[%d] : %-5level : %msg%n"
+
