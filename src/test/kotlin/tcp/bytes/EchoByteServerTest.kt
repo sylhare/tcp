@@ -1,4 +1,4 @@
-package bytes
+package tcp.bytes
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.jupiter.api.Test

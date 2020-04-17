@@ -1,11 +1,9 @@
-package tcp
+package tcp.examples
 
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import tcp.examples.Client
-import tcp.examples.Server
 import java.io.IOException
 
 internal class ClientTest {

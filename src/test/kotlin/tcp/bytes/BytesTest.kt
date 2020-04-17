@@ -1,4 +1,4 @@
-package bytes
+package tcp.bytes
 
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test

@@ -12,7 +12,7 @@ import org.springframework.integration.ip.tcp.serializer.ByteArrayCrLfSerializer
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.MessageHandler
 
-@Property("\${spring.config.host}")
+@Value("\${spring.config.host}")
 internal lateinit var host: String
 
 @Bean

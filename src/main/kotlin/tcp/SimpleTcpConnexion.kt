@@ -2,9 +2,8 @@ package tcp
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.springframework.context.annotation.PropertySource
-import tcp.Example.Companion.client
-import tcp.Example.Companion.server
+import tcp.SimpleServerClientTcpConnexion.Companion.client
+import tcp.SimpleServerClientTcpConnexion.Companion.server
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.*
@@ -14,7 +13,7 @@ import java.util.*
  * https://stackoverflow.com/questions/56535473/how-to-send-and-receive-strings-through-tcp-connection-using-kotlin
  */
 
-class Example {
+class SimpleServerClientTcpConnexion {
 
     companion object {
         fun server() {

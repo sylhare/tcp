@@ -1,4 +1,4 @@
-package mock
+package tcp.mock
 
 import io.mockk.Runs
 import io.mockk.every

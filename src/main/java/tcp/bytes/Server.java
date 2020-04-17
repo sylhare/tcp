@@ -1,4 +1,4 @@
-package bytes;
+package tcp.bytes;
 
 // A Java program for a Server
 

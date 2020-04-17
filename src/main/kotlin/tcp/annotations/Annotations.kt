@@ -1,6 +1,5 @@
-package annotations
+package tcp.annotations
 
-import java.util.*
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 

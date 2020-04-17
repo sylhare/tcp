@@ -1,4 +1,4 @@
-package mock;
+package tcp.mock;
 
 import java.io.IOException;
 import java.net.ServerSocket;

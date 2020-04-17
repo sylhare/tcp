@@ -1,4 +1,4 @@
-package bytes
+package tcp.bytes
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

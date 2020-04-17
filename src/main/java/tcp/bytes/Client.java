@@ -1,4 +1,4 @@
-package bytes;
+package tcp.bytes;
 
 import java.io.*;
 import java.net.Socket;
