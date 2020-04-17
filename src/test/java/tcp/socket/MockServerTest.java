@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -44,6 +45,5 @@ public class MockServerTest {
         assertEquals("Hello, world!", receivedMessage);
         mockClientSocket.close();
         connection.closeSocket();
-
     }
 }

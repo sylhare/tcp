@@ -18,7 +18,7 @@ class Example {
 
     companion object {
         fun server() {
-            val server = ServerSocket(9999)
+            val server = ServerSocket(9998)
             println("Server running on port ${server.localPort}")
             val client = server.accept()
             println("Client connected : ${client.inetAddress.hostAddress}")
@@ -32,7 +32,7 @@ class Example {
 
         fun client() {
             println("Client's ready to stream")
-            val client = Socket("127.0.0.1", 9999)
+            val client = Socket("127.0.0.1", 9998)
             client.outputStream.write("Hello from the client!".toByteArray())
             client.close()
         }

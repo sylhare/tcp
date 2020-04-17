@@ -1,4 +1,4 @@
-package tcp
+package tcp.example
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -46,6 +46,6 @@ fun main(args: Array<String>) {
         }
     } finally {
         serverSocket.close()
-        println("Closing server socket")
+        println("Closing server tcp.socket")
     }
 }
