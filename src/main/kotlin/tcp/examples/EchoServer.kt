@@ -14,7 +14,7 @@ class ClientHandler(private val clientSocket: Socket) : Runnable {
 
     init {
         connectionId = ++numConnections
-        println("Handling connection, #$connectionId")
+        println("Handling connection, #$connectionId for ${clientSocket.remoteSocketAddress}")
     }
 
     override fun run() {
@@ -30,7 +30,7 @@ class ClientHandler(private val clientSocket: Socket) : Runnable {
         reader.close()
         writer.close()
         clientSocket.close()
-        println("Closing connection, #$connectionId")
+        println("Closing connection, #$connectionId for ${clientSocket.remoteSocketAddress}")
     }
 
     private companion object {

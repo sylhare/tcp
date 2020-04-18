@@ -6,17 +6,17 @@ import java.io.IOException
 import java.io.PrintWriter
 import java.net.ServerSocket
 
-internal class Server(val socket: ServerSocket) {
+internal class Server(private val serverSocket: ServerSocket) {
 
     fun listen() {
         GlobalScope.launch {
-            listen(socket)
+            listen(serverSocket)
         }
     }
 
     @Throws(IOException::class)
     fun close() {
-        socket.close()
+        serverSocket.close()
     }
 
 }

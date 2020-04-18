@@ -33,6 +33,89 @@ There are 4 types of sockets (stream, datagram, raw, sequenced packet).
 Socket is layer 5 (data, Session), two computer should have a socket connection to exchange data. 
 You can use TCP for the transport of that data.
 
+## Implementation
+
+We will be using:
+
+```kotlin
+import java.net.ServerSocket
+import java.net.Socket
+```
+
+### Server and Client
+
+There are two concepts here:
+  - A server accepts clients connexion. 
+    ```kotlin
+    val server = ServerSocket(9999)
+    val socket = server.accept()
+    ``` 
+  - A Client looks for a server to establish a connexion.
+    ```kotlin
+    val socket = Socket("localhost", 9999)
+    ```
+  
+However once the connexion is establish ie the client socket is created and connected to the server.
+Then bytes exchange can flow.
+
+### Socket
+
+The Socket is that connexion between the server and the client.
+  - Server's socket input is client's socket output.
+  - Server's socket output is client's socket input.
+  
+So basically you read from the input and write to the output. 
+You work with Bytes, which might not be the best for your use case. 
+For text you can use some wrapper:
+  - to write and send text:
+  ```kotlin
+  PrintWriter(socket.outputStream, true).write("text") 
+  ```
+  - to read bytes as text
+  ```kotlin
+  val text = BufferedReader(InputStreamReader(socket.inputStream)).readLine()
+  ```
+The write is pretty straightforward, you can `flush` the outputStream meaning to forcefully send whatever is in the pipe at that moment.
+The reader requires a buffer, which it will use to copy the read bytes into it.
+
+### Multi bind 
+
+When you have one server that needs to accept multiple clients.
+Oracle documentation about [TCP Client Server](https://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html)
+sum it up quite well:
+
+```kotlin
+while (true) {
+    val socket = server.accept()            // accept a connection
+    Thread{ handleClient(socket) }.start()  // create a thread to deal with the client
+}
+```
+
+### Testing
+
+For testing a connexion, and your tcp server, client.
+You have a wide range of possibilities. 
+
+You can either mock the `socket` and the connection to test the logic 
+behind the reading and writing of the data, everything is handled well.
+You would do that using [mockK](https://mockk.io/) in kotlin
+
+```kotlin
+    // Create a mock
+    @MockK
+    lateinit var mockClientSocket: Socket
+    
+    // Set the mock up using real OutputStream and InputStream
+    fun setup() {
+        every { mockClientSocket.getOutputStream() } returns output
+        every { mockClientSocket.getInputStream() } returns input
+    }
+```
+
+Create a real mock server / client that will send the data. With this, you can create a real connexion 
+and add some methods to control what is being sent and if it's received back. 
+However for simple use case your test client / server might be real close to your main code.
+
 ## Bits and Bytes
 
 ### Representation
