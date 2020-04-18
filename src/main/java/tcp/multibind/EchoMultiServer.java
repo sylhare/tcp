@@ -1,4 +1,4 @@
-package tcp.greet;
+package tcp.multibind;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,9 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ *  https://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html
+ */
 public class EchoMultiServer {
     private ServerSocket serverSocket;
 
@@ -25,7 +28,7 @@ public class EchoMultiServer {
         private PrintWriter out;
         private BufferedReader in;
 
-        public EchoClientHandler(Socket socket) {
+        EchoClientHandler(Socket socket) {
             this.clientSocket = socket;
         }
 
