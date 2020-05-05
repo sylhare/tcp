@@ -116,6 +116,17 @@ Create a real mock server / client that will send the data. With this, you can c
 and add some methods to control what is being sent and if it's received back. 
 However for simple use case your test client / server might be real close to your main code.
 
+### With netcat
+
+You can use [netcat](https://en.wikipedia.org/wiki/Netcat) use with `nc` to create a tcp server or client using:
+
+```bash
+# listens on port 9999
+nc -l 9999
+# Sends hello to localhost:9999
+nc localhost 9999 hello 
+```
+
 ## Bits and Bytes
 
 ### Representation

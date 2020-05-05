@@ -71,4 +71,15 @@ class BytesTest {
         val b = BitSet(4)
         assertEquals(64, b.size())
     }
+
+    @Test
+    @ExperimentalUnsignedTypes
+    fun bytesAndUBytes() {
+        assertEquals("c0", Integer.toHexString(192))
+        assertEquals(0xc0, 192)
+        assertEquals(192, 0xc0.toUByte().toInt())
+        assertEquals(-64, 0xc0.toByte().toInt())
+        assertEquals(192, (0xc0.toByte().toInt() and 0xff))
+        listOf(192, 128, 57).forEach { print("0x${Integer.toHexString(it)},") }
+    }
 }
