@@ -125,6 +125,7 @@ You can use [netcat](https://en.wikipedia.org/wiki/Netcat) use with `nc` to crea
 nc -l 9999
 # Sends hello to localhost:9999
 nc localhost 9999 hello 
+telnet localhost 9999
 ```
 
 ## Bits and Bytes
