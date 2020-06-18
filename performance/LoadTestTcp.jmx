@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ConfigTestElement guiclass="TCPConfigGui" testclass="ConfigTestElement" testname="TCP Sampler Config" enabled="true">
+        <stringProp name="TCPSampler.server">${__P(host, localhost)}</stringProp>
+        <boolProp name="TCPSampler.reUseConnection">true</boolProp>
+        <stringProp name="TCPSampler.port">${__P(port, 5556)}</stringProp>
+        <boolProp name="TCPSampler.nodelay">false</boolProp>
+        <stringProp name="TCPSampler.timeout">3000</stringProp>
+        <stringProp name="TCPSampler.request"></stringProp>
+        <boolProp name="TCPSampler.closeConnection">false</boolProp>
+        <stringProp name="TCPSampler.ctimeout">3000</stringProp>
+        <stringProp name="TCPSampler.EolByte">0</stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(threads)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <TCPSampler guiclass="TCPSamplerGui" testclass="TCPSampler" testname="TCP Text Sampler" enabled="true">
+          <stringProp name="TCPSampler.classname">TCPClientImpl</stringProp>
+          <stringProp name="TCPSampler.server"></stringProp>
+          <boolProp name="TCPSampler.reUseConnection">true</boolProp>
+          <stringProp name="TCPSampler.port"></stringProp>
+          <boolProp name="TCPSampler.nodelay">false</boolProp>
+          <stringProp name="TCPSampler.timeout"></stringProp>
+          <stringProp name="TCPSampler.request">hello world! ${__iterationNum()} </stringProp>
+          <boolProp name="TCPSampler.closeConnection">false</boolProp>
+          <stringProp name="TCPSampler.EolByte">0</stringProp>
+          <stringProp name="ConfigTestElement.username"></stringProp>
+          <stringProp name="ConfigTestElement.password"></stringProp>
+        </TCPSampler>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-217287203">hello world!</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <TCPSampler guiclass="TCPSamplerGui" testclass="TCPSampler" testname="TCP Text Sampler ++" enabled="false">
+          <stringProp name="TCPSampler.classname">TCPClientImpl</stringProp>
+          <stringProp name="TCPSampler.server"></stringProp>
+          <boolProp name="TCPSampler.reUseConnection">true</boolProp>
+          <stringProp name="TCPSampler.port"></stringProp>
+          <boolProp name="TCPSampler.nodelay">false</boolProp>
+          <stringProp name="TCPSampler.timeout"></stringProp>
+          <stringProp name="TCPSampler.request"></stringProp>
+          <boolProp name="TCPSampler.closeConnection">false</boolProp>
+          <stringProp name="TCPSampler.EolByte">0</stringProp>
+          <stringProp name="ConfigTestElement.username"></stringProp>
+          <stringProp name="ConfigTestElement.password"></stringProp>
+        </TCPSampler>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">import java.io.*;
+import org.apache.jmeter.protocol.tcp.sampler.*;
+
+String textToSend = &quot;&quot;;
+String fline = &quot;&quot;;
+
+FileReader fR = new FileReader(&quot;${fname, hello.txt}&quot;);
+BufferedReader bR = new BufferedReader(fR);
+
+while((fline = bR.readLine())!= null){
+	textToSend = textToSend + fline;
+}
+sampler.setRequestData(textToSend);
+
+String host = vars.get(&quot;host&quot;); 		// get &quot;host&quot; variable as string
+vars.put(&quot;text&quot;, host);        		// save result to a new variable called &quot;host&quot;
+
+// The code above assumes that your Regular Expression Extractor uses &quot;host&quot; as &quot;Reference Name&quot;. 
+// You will be able to access it as ${text} or ${__V(text)} wherever required. </stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">packNum</stringProp>
+            <stringProp name="RegexExtractor.regex">Packet(.+):</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number"></stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="script">print(${packNum})</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-217287203">hello world!</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <TCPSampler guiclass="TCPSamplerGui" testclass="TCPSampler" testname="TCP Binary Sampler" enabled="true">
+          <stringProp name="TCPSampler.classname">BinaryTCPClientImpl</stringProp>
+          <stringProp name="TCPSampler.server"></stringProp>
+          <boolProp name="TCPSampler.reUseConnection">true</boolProp>
+          <stringProp name="TCPSampler.port"></stringProp>
+          <boolProp name="TCPSampler.nodelay">false</boolProp>
+          <stringProp name="TCPSampler.timeout"></stringProp>
+          <stringProp name="TCPSampler.request">101000003c0c1117c2</stringProp>
+          <boolProp name="TCPSampler.closeConnection">false</boolProp>
+          <stringProp name="TCPSampler.EolByte">0</stringProp>
+          <stringProp name="ConfigTestElement.username"></stringProp>
+          <stringProp name="ConfigTestElement.password"></stringProp>
+        </TCPSampler>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1911998296">Packet</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+        <TCPSampler guiclass="TCPSamplerGui" testclass="TCPSampler" testname="TCP Fake Binary Sampler" enabled="true">
+          <stringProp name="TCPSampler.classname">TCPClientImpl</stringProp>
+          <stringProp name="TCPSampler.server"></stringProp>
+          <boolProp name="TCPSampler.reUseConnection">true</boolProp>
+          <stringProp name="TCPSampler.port"></stringProp>
+          <boolProp name="TCPSampler.nodelay">false</boolProp>
+          <stringProp name="TCPSampler.timeout"></stringProp>
+          <stringProp name="TCPSampler.request"></stringProp>
+          <boolProp name="TCPSampler.closeConnection">false</boolProp>
+          <stringProp name="ConfigTestElement.username"></stringProp>
+          <stringProp name="ConfigTestElement.password"></stringProp>
+        </TCPSampler>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.commons.codec.binary.Hex;
+
+
+char[] hexchars = &quot;0123456789abcdef&quot;.toCharArray();
+String randomHex = &quot;&quot; + hexchars[${__Random(1,15,)}] + hexchars[${__Random(1,15,)}];
+String hexString = &quot;101000003335393900&quot; + randomHex;					// Random Hex String
+log.info(&quot;Hex Stream &quot; + hexString);
+byte[] bytes = Hex.decodeHex(hexString.toCharArray());  				// Decode Hex as byte[]
+String hex = new String(bytes, &quot;UTF-8&quot;); 							// Transform bytes as String
+log.info(&quot;Hex Bytes to String  &quot; + hex);							// Does not look like letters but -&gt; &#x0;&#x1;&#x0;&#x0;
+
+sampler.setRequestData(hex);						// Send the &quot;text&quot; which is actually our hex as byte in a String</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">performance.csv</stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="AssertionVisualizer" testclass="ResultCollector" testname="Assertion Results" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
