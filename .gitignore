@@ -4,3 +4,5 @@
 build/*
 out/
 .DS_Store
+performance/*.csv
+performance/jmeter.log
