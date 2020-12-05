@@ -43,6 +43,13 @@ class BytesTest {
     }
 
     @Test
+    fun bitShiftingtest() {
+        assertEquals(127.toByte(), (0xff ushr 1))
+        assertEquals(127.toByte(), (0xff xor 0x80))
+        assertEquals(2.toByte(), (0x82 xor 0x80))
+    }
+
+    @Test
     fun byteArrays() {
         val charset = Charsets.UTF_8
         val byteArray = "Hello".toByteArray(charset)
