@@ -1,12 +1,10 @@
 package ktor
 
-import io.ktor.network.selector.ActorSelectorManager
-import io.ktor.network.sockets.aSocket
-import io.ktor.network.sockets.openReadChannel
-import io.ktor.network.sockets.openWriteChannel
-import io.ktor.util.KtorExperimentalAPI
-import io.ktor.util.cio.write
-import io.ktor.utils.io.readUTF8Line
+import io.ktor.network.selector.*
+import io.ktor.network.sockets.*
+import io.ktor.util.*
+import io.ktor.util.cio.*
+import io.ktor.utils.io.*
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
