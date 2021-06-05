@@ -24,11 +24,11 @@ internal class Server {
         handleMessage()
     }
 
-    private fun handleMessage() {
+    fun handleMessage() {
         val message = input.readLine()
         println("Server receiving [${message}]")
         val response = when (message) {
-            "hello server" -> "hello client"
+            "Hello server" -> "Hello client"
             else -> "Danger ... friend"
         }
         println("Server responding [${response}]")
@@ -49,7 +49,6 @@ internal class Server {
 fun main() {
     val server = Server()
     server.start(9999)
+    server.handleMessage()
     server.stop()
-
 }
-

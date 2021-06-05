@@ -34,6 +34,8 @@ internal class Client {
 fun main() {
     val client = Client()
     client.startConnection("127.0.0.1", 9999)
+    client.sendMessage("Hello server")
     client.sendMessage("Hello from the client")
+    //Thread.sleep(2000)
     client.stopConnection()
 }
