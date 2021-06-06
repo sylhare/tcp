@@ -2,24 +2,21 @@ package ktor
 
 import io.ktor.network.selector.*
 import io.ktor.network.sockets.*
-import io.ktor.util.*
-import io.ktor.util.cio.*
 import io.ktor.utils.io.*
 import kotlinx.coroutines.*
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 
-@KtorExperimentalAPI
+
 suspend fun client() {
     val socket =
         aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(InetSocketAddress("127.0.0.1", 2323))
     val input = socket.openReadChannel()
     val output = socket.openWriteChannel(autoFlush = true)
-    output.write("hello\r\n")
+    output.writeFully("hello\r\n".toByteArray())
     println("Server said: '${input.readUTF8Line()}'")
 }
 
-@KtorExperimentalAPI
 suspend fun server() {
     val server = aSocket(ActorSelectorManager(Executors.newCachedThreadPool().asCoroutineDispatcher())).tcp()
         .bind(InetSocketAddress("127.0.0.1", 2323))
@@ -31,10 +28,9 @@ suspend fun server() {
 
     val line = input.readUTF8Line()
     println("received '$line' from ${socket.remoteAddress}")
-    output.write("$line\r\n back")
+    output.writeFully("$line\r\n back".toByteArray())
 }
 
-@KtorExperimentalAPI
 fun main() {
     CoroutineScope(Dispatchers.Default).launch { server() }
     runBlocking { client() }

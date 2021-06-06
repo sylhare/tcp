@@ -26,12 +26,13 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("io.ktor:ktor-server-netty:1.3.2")
+    implementation("io.ktor:ktor-server-netty:1.6.0")
+    implementation("io.ktor:ktor-network:1.6.0")
     implementation("ch.qos.logback:logback-classic:1.2.3")
     implementation("commons-io:commons-io:2.5")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation("io.mockk:mockk:1.9.3")
-    testImplementation("io.ktor:ktor-server-test-host:1.3.2")
+    testImplementation("io.ktor:ktor-server-test-host:1.6.0")
     testImplementation("org.mockito:mockito-core:2.23.4")
 
     implementation("org.springframework.integration:spring-integration-core")

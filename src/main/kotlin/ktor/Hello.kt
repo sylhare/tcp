@@ -12,7 +12,7 @@ import io.ktor.server.netty.*
  * https://ktor.io/quickstart/
  * Access it via http://127.0.0.1:8080
  */
-fun main(args: Array<String>) {
+fun main() {
     val server = embeddedServer(Netty, port = 8080) {
         routing {
             get("/") {

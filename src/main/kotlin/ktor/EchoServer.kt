@@ -2,8 +2,6 @@ package ktor
 
 import io.ktor.network.selector.*
 import io.ktor.network.sockets.*
-import io.ktor.util.*
-import io.ktor.util.cio.*
 import io.ktor.utils.io.*
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -14,15 +12,14 @@ import java.util.concurrent.Executors
 
 internal class EchoServer {
 
-    @KtorExperimentalAPI
     fun start() {
         runBlocking {
             val server = aSocket(ActorSelectorManager(Executors.newCachedThreadPool().asCoroutineDispatcher())).tcp()
-                .bind(InetSocketAddress("127.0.0.1", 2323))
-            println("Started echo telnet server at ${server.localAddress}")
+                .bind(InetSocketAddress("127.0.0.1", 2224))
+            println("Started echo telnet server at ${server!!.localAddress}")
 
             while (true) {
-                val socket = server.accept()
+                val socket = server!!.accept()
 
                 launch {
                     println("Socket accepted: ${socket.remoteAddress}")
@@ -35,7 +32,7 @@ internal class EchoServer {
                             val line = input.readUTF8Line()
 
                             println("${socket.remoteAddress}: $line")
-                            output.write("$line\r\n")
+                            output.writeFully("$line\r\n".toByteArray())
                         }
                     } catch (e: Throwable) {
                         e.printStackTrace()
@@ -49,10 +46,10 @@ internal class EchoServer {
 
 /**
  * https://ktor.io/servers/raw-sockets.html
- * telnet 127.0.0.1 2323
+ * telnet 127.0.0.1 2224
  */
-@KtorExperimentalAPI
-fun main(args: Array<String>) {
+
+fun main() {
     EchoServer().start()
 }
 
