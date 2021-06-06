@@ -1,13 +1,14 @@
 package tcp.greet;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import tcp.multibind.EchoMultiServer;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import tcp.multibind.EchoMultiServer;
 
 class EchoTest {
 
@@ -20,7 +21,7 @@ class EchoTest {
         new Thread(() -> {
             server = new EchoServer();
             try {
-                server.start(4444);
+                server.start(4441);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -29,13 +30,13 @@ class EchoTest {
         new Thread(() -> {
             multiServer = new EchoMultiServer();
             try {
-                multiServer.start(5555);
+                multiServer.start(1555);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
         client = new GreetClient();
-        client.startConnection("127.0.0.1", 4444);
+        client.startConnection("127.0.0.1", 4441);
     }
 
     @AfterAll
@@ -61,7 +62,7 @@ class EchoTest {
     @Test
     void multiEchoServerRespondsToClientOne() throws IOException {
         GreetClient client1 = new GreetClient();
-        client1.startConnection("127.0.0.1", 5555);
+        client1.startConnection("127.0.0.1", 1555);
         String msg1 = client1.sendMessage("hello");
         String msg2 = client1.sendMessage("world");
         String terminate = client1.sendMessage(".");
@@ -74,7 +75,7 @@ class EchoTest {
     @Test
     public void multiEchoServerRespondsRespondstoClientTwo() throws IOException {
         GreetClient client2 = new GreetClient();
-        client2.startConnection("127.0.0.1", 5555);
+        client2.startConnection("127.0.0.1", 1555);
         String msg1 = client2.sendMessage("hello");
         String msg2 = client2.sendMessage("world");
         String terminate = client2.sendMessage(".");

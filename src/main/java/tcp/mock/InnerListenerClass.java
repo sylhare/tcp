@@ -7,7 +7,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-
 class InnerListenerClass implements Runnable {
     private final ServerSocket socket;
 

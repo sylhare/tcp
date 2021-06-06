@@ -19,6 +19,7 @@ class MockTest {
 
     private val input: InputStream = mockk()
     private val output: OutputStream = mockk(relaxed = true)
+
     // Create a mock
     @MockK(relaxUnitFun = true)
     lateinit var mockClientSocket: Socket

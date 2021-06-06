@@ -37,8 +37,8 @@ internal class ClientTest {
     fun serverRespondsHelloClient() {
         client = Client()
         client.startConnection("127.0.0.1", port)
-        val response = client.sendMessage("hello server")
-        Assertions.assertEquals("hello client", response)
+        val response = client.sendMessage("Hello server")
+        Assertions.assertEquals("Hello client", response)
         client.stopConnection()
     }
 
@@ -49,7 +49,7 @@ internal class ClientTest {
         client = Client()
         client.startConnection("127.0.0.1", port)
         val response = client.sendMessage("Yo!")
-        Assertions.assertNotEquals("hello client", response)
+        Assertions.assertNotEquals("Hello client", response)
         client.stopConnection()
     }
 

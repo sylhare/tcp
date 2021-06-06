@@ -8,15 +8,16 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- *  https://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html
+ * https://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html
  */
 public class EchoMultiServer {
     private ServerSocket serverSocket;
 
     public void start(int port) throws IOException {
         serverSocket = new ServerSocket(port);
-        while (true)
+        while (true) {
             new EchoClientHandler(serverSocket.accept()).start();
+        }
     }
 
     public void stop() throws IOException {
@@ -24,9 +25,7 @@ public class EchoMultiServer {
     }
 
     private static class EchoClientHandler extends Thread {
-        private Socket clientSocket;
-        private PrintWriter out;
-        private BufferedReader in;
+        private final Socket clientSocket;
 
         EchoClientHandler(Socket socket) {
             this.clientSocket = socket;
@@ -34,8 +33,8 @@ public class EchoMultiServer {
 
         public void run() {
             try {
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
-                in = new BufferedReader(
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(
                         new InputStreamReader(clientSocket.getInputStream()));
 
                 String inputLine;

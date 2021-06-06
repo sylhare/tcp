@@ -9,7 +9,7 @@ import java.net.Socket
 
 
 @Throws(IOException::class)
-fun main(args: Array<String>) {
+fun main() {
     val serverSocket = ServerSocket(9999)
     while (true) {
         val client = serverSocket.accept()  // accept a connection

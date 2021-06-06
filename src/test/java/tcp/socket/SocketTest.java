@@ -1,6 +1,6 @@
 package tcp.socket;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  * http://rememberjava.com/socket/2017/02/21/socket_client_server.html
@@ -20,15 +20,13 @@ import static org.junit.Assert.assertEquals;
 public class SocketTest {
 
     private static final int PORT = 8887;
-
-    private OutputStream serverOut;
-    private InputStream serverIn;
-
     /**
      * Shared lock between the "client" and "server" code, to make the test case
      * synchronous.
      */
-    private Semaphore lock = new Semaphore(0);
+    private final Semaphore lock = new Semaphore(0);
+    private OutputStream serverOut;
+    private InputStream serverIn;
 
     /**
      * Tests server and client side sockets in one flow. A lock object is used for
@@ -46,7 +44,6 @@ public class SocketTest {
         System.out.println("Waiting for lock");
         lock.acquire();
         System.out.println("Acquired lock");
-
 
         write(clientOut, "Hi");
         Thread.sleep(200);

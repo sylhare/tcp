@@ -4,16 +4,19 @@ plugins {
     java
     application
     `maven-publish`
-    kotlin("jvm") version "1.3.71"
-    kotlin("plugin.spring") version "1.3.71"
+    kotlin("jvm") version "1.4.32"
+    kotlin("plugin.spring") version "1.4.32"
     id("org.springframework.boot") version "2.2.6.RELEASE"
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
 }
 
-group = "exercise"
-application.mainClassName = "spring.ApplicationKt"
+group = "tcp"
 java.sourceCompatibility = JavaVersion.VERSION_11
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass.set("spring.ApplicationKt")
+}
 
 repositories {
     mavenCentral()
@@ -44,10 +47,9 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 }
-
 
 tasks.withType<Test> {
     useJUnitPlatform()

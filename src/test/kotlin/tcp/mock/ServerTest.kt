@@ -23,6 +23,7 @@ internal class ServerTest {
 
     @MockK
     lateinit var mockServerSocket: ServerSocket
+
     @MockK
     lateinit var mockClientSocket: Socket
 

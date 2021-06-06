@@ -10,10 +10,9 @@ import java.net.Socket
  * https://rosettacode.org/wiki/Echo_server#Kotlin
  */
 class ClientHandler(private val clientSocket: Socket) : Runnable {
-    private val connectionId: Int
+    private val connectionId: Int = ++numConnections
 
     init {
-        connectionId = ++numConnections
         println("Handling connection, #$connectionId for ${clientSocket.remoteSocketAddress}")
     }
 
@@ -38,7 +37,7 @@ class ClientHandler(private val clientSocket: Socket) : Runnable {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val serverSocket = ServerSocket(9999)
     try {
         while (true) {

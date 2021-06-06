@@ -17,7 +17,7 @@ internal class AnnotationsTest {
     @TestSize(TestSizes.LARGE)
     class ExampleLarge
 
-    @Greeter(greet="Good morning")
+    @Greeter(greet = "Good morning")
     class Greetings
 
     class MyClass(@MyAnnotation val attr: String)
@@ -51,8 +51,6 @@ internal class AnnotationsTest {
         val greetings = Greetings::class.java.getAnnotation(Greeter::class.java)
         assertEquals("Good morning", greetings.greet)
     }
-
-
 
 
 }
