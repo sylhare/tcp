@@ -9,8 +9,8 @@ import java.util.concurrent.Executors
 
 
 suspend fun client() {
-    val socket =
-        aSocket(ActorSelectorManager(Dispatchers.IO)).tcp().connect(InetSocketAddress("127.0.0.1", 2323))
+    val socket = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp()
+        .connect(InetSocketAddress("127.0.0.1", 2323))
     val input = socket.openReadChannel()
     val output = socket.openWriteChannel(autoFlush = true)
     output.writeFully("hello\r\n".toByteArray())
@@ -18,7 +18,8 @@ suspend fun client() {
 }
 
 suspend fun server() {
-    val server = aSocket(ActorSelectorManager(Executors.newCachedThreadPool().asCoroutineDispatcher())).tcp()
+    //val server = aSocket(ActorSelectorManager(Executors.newCachedThreadPool().asCoroutineDispatcher())).tcp()
+    val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp()
         .bind(InetSocketAddress("127.0.0.1", 2323))
     println("Server running: ${server.localAddress}")
     val socket = server.accept()
