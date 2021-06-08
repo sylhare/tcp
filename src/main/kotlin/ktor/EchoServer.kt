@@ -16,10 +16,10 @@ internal class EchoServer {
         runBlocking {
             val server = aSocket(ActorSelectorManager(Executors.newCachedThreadPool().asCoroutineDispatcher())).tcp()
                 .bind(InetSocketAddress("127.0.0.1", 2224))
-            println("Started echo telnet server at ${server!!.localAddress}")
+            println("Started echo telnet server at ${server.localAddress}")
 
             while (true) {
-                val socket = server!!.accept()
+                val socket = server.accept()
 
                 launch {
                     println("Socket accepted: ${socket.remoteAddress}")
